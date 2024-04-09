@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/btn_go_back_tv"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/regreso_op2"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginStart="10dp"
+                    />
+
+                <ImageView
+                    android:id="@+id/img_title_am"
+                    android:layout_width="300dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="-5dp"
+                    android:background="@drawable/smrtvsinfondo" />
+
+            </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="390dp"
+                    android:layout_height="350dp"
+                    android:orientation="vertical"
+                    android:layout_marginStart="0dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/edge_fm_am"
+                    tools:ignore="MissingConstraints">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/TvOnline"
+                        android:layout_gravity="center"
+                        android:textColor="#ffffff"
+                        android:fontFamily="@font/galanogrotesquebold"
+                        android:textSize="10pt"/>
+
+                    <!--<com.google.android.exoplayer2.ui.PlayerView
+                        android:id="@+id/videoView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />-->
+
+                    <com.brightcove.player.view.BrightcoveExoPlayerVideoView
+                        android:id="@+id/videoView"
+                        android:layout_width="match_parent"
+                        android:layout_height="280dp"
+                        android:layout_gravity="center_horizontal|top"/>
+
+                    <!--<VideoView
+                        android:id="@+id/videoView"
+                        android:layout_width="380dp"
+                        android:layout_height="270dp" />-->
+
+
+
+                    <!--<com.nullpointer.exoplayerdemo.ExoPlayerView
+                        android:id="@+id/exoPlayerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="MissingClass" />-->
+
+                </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="390dp"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:background="@drawable/edge_fm_am"
+                android:layout_margin="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/iconovolumen"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="0dp"/>
+
+                <SeekBar
+                    android:id="@+id/seekbar_tv"
+                    android:layout_width="330dp"
+                    android:layout_height="100dp"
+                    android:progressDrawable="@drawable/gestionar_seekbar"
+                    android:thumb="@mipmap/perilla"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="-12dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:background="@drawable/edge_fm_am"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:id="@+id/img_refresh_tv"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/actualizar"
+                    android:layout_marginTop="0dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

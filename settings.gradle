@@ -1,0 +1,20 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        //este es un codigo aparte o nuevo que se esta provando
+        maven {
+            url 'https://repo.brightcove.com/releases'
+        }
+    }
+}
+rootProject.name = "Radio&TvOnline"
+include ':app'

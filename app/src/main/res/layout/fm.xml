@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/btn_go_back_fm"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/regreso_op2"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginStart="10dp"/>
+
+                <ImageView
+                    android:id="@+id/imgtitulo_fm"
+                    android:layout_width="300dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/smrtvsinfondo" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edge_fm_am"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:layout_width="300dp"
+                    android:layout_height="240dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/radio_fm"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/volumen"
+                android:textSize="15pt"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/galanogrotesquebold"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:background="@drawable/edge_fm_am"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/iconovolumen"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="0dp"/>
+
+                <SeekBar
+                    android:id="@+id/seekbar_fm"
+                    android:layout_width="330dp"
+                    android:layout_height="100dp"
+                    android:progressDrawable="@drawable/gestionar_seekbar"
+                    android:thumb="@mipmap/perilla"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="-12dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:orientation="horizontal"
+                android:background="@drawable/edge_fm_am"
+                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/img_refresh_fm"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/actualizar"
+                    android:layout_marginTop="0dp"/>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
