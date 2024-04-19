@@ -9,26 +9,27 @@ import android.widget.ImageView;
 
 public class slash extends AppCompatActivity {
 
-    private static final int TIEMPO_DEMOSTRACION_IMAGEN = 3000; // Tiempo en milisegundos (3 segundos)
+    private static final int TIEMPO_DEMOSTRACION_IMAGEN = 3000; //TIEMPO QUE DURA VISIBLE 1000 ES UN SEGUNDO LO CUAL AHI VA A DURAR 3 SEGUNDOS
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.slash);
 
-        final ImageView imageView = findViewById(R.id.slash); // Suponiendo que tu ImageView tiene el ID "slash"
-        imageView.setImageResource(R.drawable.butonsmrtvodos); // Establecer la imagen en el ImageView
+        final ImageView imageView = findViewById(R.id.slash); //WE ASSIGN OUR ID FROM OUR SLASH
+        imageView.setImageResource(R.drawable.butonsmrtvodos); // WE ESTABLISH OUR IMAGE THAT APPEARS IN OUR SLASH
 
-        // Programar la transición a MainActivity después de un tiempo determinado (3 segundos)
+        //TELL THE APP WHAT YOU WILL DO AFTER IT FINISHES SHOWING OUR SLASH
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(slash.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Limpiar el stack de actividades si MainActivity ya está en él
-                startActivity(intent); // Iniciar MainActivity
-                finish(); // Finalizar slash para que no se pueda volver atrás
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // CLEAN THE ACTIVITY STACK IF THE MAINACTIVITY IS ALREADY IN IT
+                startActivity(intent); //START OUR ACTION BY MOVING TO OUR MAINACTIVITY
+                finish(); // END OUR SLASH
             }
         }, TIEMPO_DEMOSTRACION_IMAGEN);
+
 
     }
 }

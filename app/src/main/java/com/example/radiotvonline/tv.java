@@ -1,71 +1,102 @@
 package com.example.radiotvonline;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.PixelFormat;
-import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.MediaController;
-import android.widget.ProgressBar;
-import android.widget.Toast;
+import android.widget.SeekBar;
 import android.widget.VideoView;
 
-import com.brightcove.player.analytics.Analytics;
-import com.brightcove.player.model.DeliveryType;
-import com.brightcove.player.model.Video;
-import com.brightcove.player.view.BrightcoveExoPlayerVideoView;
-import com.brightcove.player.view.BrightcovePlayer;
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.ui.BuildConfig;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 
 public class tv extends AppCompatActivity {
 
+    /*Televisión
+    https://s5.mexside.net:1936/enlinea/enlinea/playlist.m3u8*/
 
+    //DECLARATION OF GLOBAL VARIABLE OF THE MEDIA PLAYER
+    private MediaPlayer mediaPlayer;
 
-    //String videoUrl = "rtmp://s5.mexside.net:1935/enlinea/enlinea";
-
-    private String URL = "rtmp://s5.mexside.net:1935/enlinea/enlinea";
-    private ProgressDialog dp;
-    private BrightcoveExoPlayerVideoView videoView;
-    private String videoUri = "rtmp://s5.mexside.net:1935/enlinea/enlinea";
-
-
+    //DECLARATION OF GLOBAL VARIABLE SEEKBAR
+    private SeekBar volumeSeekBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tv);
 
+        // WE INITIALIZE MEDIA PLAYER
+        mediaPlayer = new MediaPlayer();
 
 
-        //rtmp://s5.mexside.net:1935/enlinea/enlinea
+        //https://s5.mexside.net:1936/enlinea/enlinea/playlist.m3u8
+        //--------------------------------------------------------------------------------------------------------------
+        //-----------------------------HERE WE HAVE THE CODE TO TRANSMIT LIVE TV----------------------------------------
+        //--------------------------------------------------------------------------------------------------------------
 
+        VideoView videoView = findViewById(R.id.videoView); //THE ID IS ASSIGNED TO THE GLOBAL VARIABLE WE CREATE
+        String URL = "https://s5.mexside.net:1936/enlinea/enlinea/playlist.m3u8";//WE DECLARE THE LIVE VIDEO URL
+
+        //WE ASSIGN THE URL AS IF IT WERE A STRING
+        Uri uri = Uri.parse(URL);
+        //WE ASSIGN IT TO VIDEOVIEW
+        videoView.setVideoURI(uri);
+
+        //WE INITIALIZE IN ANDROID STUDIO PLAYER
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(videoView);
+        videoView.setMediaController(mediaController);
+
+        //WE START PLAYING THE LIVE VIDEO
+        videoView.start();
 
         //--------------------------------------------------------------------------------------------------------------
-        //-----------------------------Aqui tenemos el codigo para transmitir video en vivo-----------------------------------------
+        //--------------------------------------END OF THIS SECTION-----------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------
 
-        //Aqui solo estoy declarando algubnas variables y mandando llamar una funcion que se llama playvideo
-        videoView = findViewById(R.id.videoView);
-        dp = new ProgressDialog(this);
-        dp.setCancelable(true);
-
-        playVideo();
-
-    //--------------------------------------------------------------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------
+        //-----------------------------HERE WE HAVE THE CODE TO CONTROL THE VOLUME---------------------------------
+        //--------------------------------------------------------------------------------------------------------------
+
+        // WE ASSIGN THE ID OF OUR SEEKBAR FROM OUR XML TO OUR GLOBAL VARIABLE
+        volumeSeekBar = findViewById(R.id.seekbar_tv);
+        //HERE WE HAVE THE CODE WHERE WE PREPARE THE SEEKBAR READY TO USE
+        volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (mediaPlayer.isPlaying()) {
+                    float volume = (float) (1 - (Math.log(100 - progress) / Math.log(100)));
+                    mediaPlayer.setVolume(volume, volume);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // HERE WE DO NOT NEED TO PUT SOMETHING SINCE WE WILL ONLY CONTROL THE VOLUME
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // HERE WE DO NOT NEED TO PUT SOMETHING SINCE WE WILL ONLY CONTROL THE VOLUME
+            }
+        });
+
+        //WE PREPARE THE MEDIA PLAYER TO PLAY IT
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                mediaPlayer = mp;
+                float volume = (float) (1 - (Math.log(100 - volumeSeekBar.getProgress()) / Math.log(100)));
+                mediaPlayer.setVolume(volume, volume);
+            }
+        });
+
+        //--------------------------------------------------------------------------------------------------------------
+        //------------------------------------END OF THIS SECTION-------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------
 
         //--------------------------------------------------------------------------------------------------------------
@@ -84,7 +115,7 @@ public class tv extends AppCompatActivity {
         });
 
         //--------------------------------------------------------------------------------------------------------------
-        //--------------------------------------------------------------------------------------------------------------
+        //--------------------------------------END OF THIS SECTION-----------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------
 
         //--------------------------------------------------------------------------------------------------------------
@@ -103,35 +134,8 @@ public class tv extends AppCompatActivity {
         });
 
         //--------------------------------------------------------------------------------------------------------------
+        //--------------------------------------END OF THIS SECTION-----------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------
-        //--------------------------------------------------------------------------------------------------------------
 
-    }
-
-//aquib tenemos lo que es la reproduccion del video en vivo
-    private void playVideo() {
-        try {
-            getWindow().setFormat(PixelFormat.TRANSLUCENT);
-            MediaController mediaController = new MediaController(this);
-            mediaController.setAnchorView(videoView);
-
-            Uri videoUri = Uri.parse(URL);
-
-            videoView.setMediaController(mediaController);
-            videoView.setVideoURI(videoUri);
-            videoView.requestFocus();
-
-            videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mediaPlayer) {
-                    dp.dismiss();
-                    videoView.start();
-                }
-            });
-
-        } catch (Exception e) {
-            dp.dismiss();
-            Toast.makeText(this, "Aqui no esta corriendo nada" , Toast.LENGTH_SHORT).show();
-        }
     }
 }

@@ -2,4 +2,7 @@
     <string name="app_name">Radio&amp;TvOnline</string>
     <string name="volumen">Volumen</string>
     <string name="TvOnline">Tv - Online</string>
+    <string name="RadioPrimeraParte">R</string>
+    <string name="RadioFmSegundaParte">dio FM</string>
+    <string name="RadioAmSegundaParte">dio AM</string>
 </resources>
