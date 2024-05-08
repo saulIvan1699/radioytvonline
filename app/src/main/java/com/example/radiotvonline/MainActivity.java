@@ -22,15 +22,27 @@ public class MainActivity extends AppCompatActivity {
         //-----------------------------CODE FOR THE VIDEO AT THE TOP TO PLAY AUTOMATICALLY------------------------------
         //--------------------------------------------------------------------------------------------------------------
 
-        //In this part we have what is a code where we play a video which requires us to put an image
-        //in the xml and with only the measurements and the id and here we only send it to call.
+        //IN THIS PART WE HAVE WHAT IS A CODE WHERE WE PLAY A VIDEO WHICH REQUIRES US TO PUT AN IMAGE
+        //IN THE XML AND WITH ONLY THE MEASUREMENTS AND THE ID AND HERE WE ONLY SEND IT TO CALL.
         VideoView videoView = findViewById(R.id.vv_test);
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
-        videoView.setOnPreparedListener(MediaPlayer::start); // Start playback automatically
-        videoView.setOnCompletionListener(MediaPlayer::start); // Play the video again when it ends
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                float volume = 0.1f; // SET THE VOLUME TO 50% OF MAXIMUM (0.1)
+                mp.setVolume(volume, volume); // SET THE VOLUME OF THE MEDIA PLAYER
+                videoView.start(); // START PLAYBACK AUTOMATICALLY WHEN READY
+            }
+        });
 
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                videoView.start(); // PLAY THE VIDEO AGAIN WHEN IT FINISHES
+            }
+        });
         //-------------------------------------------------------------------------------------------------------------------
         //-------------------------------------END OF THIS SECTION-----------------------------------------------------------
         //-------------------------------------------------------------------------------------------------------------------
@@ -40,34 +52,34 @@ public class MainActivity extends AppCompatActivity {
         //-----------------------------IN THIS SECTION IS THE BUTTON NAVIGATION-----------------------------------------
         //--------------------------------------------------------------------------------------------------------------
 
-        //Here is the code of how to navigate with buttons for the am button
+        //HERE IS THE CODE OF HOW TO NAVIGATE WITH BUTTONS FOR THE AM BUTTON
         ImageView button_am = findViewById(R.id.btn_am);
         button_am.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an Intent to start Activity, here we send the activity from where we are to where it will take us
+                // CREATE AN INTENT TO START ACTIVITY, HERE WE SEND THE ACTIVITY FROM WHERE WE ARE TO WHERE IT WILL TAKE US
                 Intent intent = new Intent(MainActivity.this, am.class);
                 startActivity(intent);
             }
         });
 
-        //Here is the code of how to navigate with buttons for the tv button
+        //HERE IS THE CODE OF HOW TO NAVIGATE WITH BUTTONS FOR THE TV BUTTON
         ImageView button_tv = findViewById(R.id.btn_tv);
         button_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an Intent to start Activity, here we send the activity from where we are to where it will take us
+                // CREATE AN INTENT TO START ACTIVITY, HERE WE SEND THE ACTIVITY FROM WHERE WE ARE TO WHERE IT WILL TAKE US
                 Intent intent = new Intent(MainActivity.this, tv.class);
                 startActivity(intent);
             }
         });
 
-        //Here is the code of how to navigate with buttons for the fm button
+        //HERE IS THE CODE OF HOW TO NAVIGATE WITH BUTTONS FOR THE TV BUTTON
         ImageView button_fm = findViewById(R.id.btn_fm);
         button_fm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an Intent to start Activity, here we send the activity from where we are to where it will take us
+                // CREATE AN INTENT TO START ACTIVITY, HERE WE SEND THE ACTIVITY FROM WHERE WE ARE TO WHERE IT WILL TAKE US
                 Intent intent = new Intent(MainActivity.this, fm.class);
                 startActivity(intent);
             }
@@ -76,7 +88,5 @@ public class MainActivity extends AppCompatActivity {
         //-------------------------------------------------------------------------------------------------------------------
         //----------------------------------------END OF THIS SECTION--------------------------------------------------------
         //-------------------------------------------------------------------------------------------------------------------
-
-
     }
 }

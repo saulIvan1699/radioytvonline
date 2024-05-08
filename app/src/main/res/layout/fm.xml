@@ -115,14 +115,33 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginStart="0dp"/>
 
-                <SeekBar
-                    android:id="@+id/seekbar_fm"
-                    android:layout_width="330dp"
-                    android:layout_height="100dp"
-                    android:progressDrawable="@drawable/gestionar_seekbar"
-                    android:thumb="@mipmap/perilla"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="-12dp"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <SeekBar
+                        android:id="@+id/seekbar_fm"
+                        android:layout_width="330dp"
+                        android:layout_height="50dp"
+                        android:max="100"
+                        android:progressDrawable="@drawable/gestionar_seekbar"
+                        android:thumb="@mipmap/perilla"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="11dp"/>
+
+                    <TextView
+                        android:id="@+id/text_volumen_fm"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:text="@string/prueba"
+                        android:textColor="@color/white"
+                        android:layout_gravity="end"
+                        android:visibility="invisible"/>
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
 
@@ -147,7 +166,7 @@
                     android:id="@+id/img_refresh_fm"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/refreshsi"
+                    android:background="@drawable/actualizar"
                     android:layout_marginTop="0dp"
                     android:layout_margin="10dp"/>
 

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -23,6 +24,7 @@ import java.io.IOException;
 
 public class fm extends AppCompatActivity {
 
+    TextView text_volumen_fm;
 
     //DECLARATION OF GLOBAL VARIABLE SEEKBAR
     private SeekBar volumeSeekBar;
@@ -54,19 +56,15 @@ public class fm extends AppCompatActivity {
                 .setUsage(AudioAttributes.USAGE_MEDIA)
                 .build());
 
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-
         //EN ESTA PARTE REDUSIMOS EL RIEGO DE QUE SE SALGA LA APP EN DADO DE DAR UN ERROR.
         try {
             mediaPlayer.setDataSource(videoUrl);
-            mediaPlayer.prepare(); // Puede lanzar IOException
+            mediaPlayer.prepare(); // YOU CAN LAUNCH THE ---->>CATCH<<----
             mediaPlayer.start();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error al reproducir audio", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error al reproducir audio"+ e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
-
         //--------------------------------------------------------------------------------------------------------------
         //-----------------------------------------END OF THIS SECTION--------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------
@@ -74,15 +72,24 @@ public class fm extends AppCompatActivity {
         //--------------------------------------------------------------------------------------------------------------
         //----------------------------HERE WE HAVE THE CODE TO CONTROL THE VOLUME---------------------------------------
         //--------------------------------------------------------------------------------------------------------------
-
-        // WE ASSIGN THE ID TO OUR VARIABLE THAT WE DECLARE GLOBALLY
+        // WE ASSIGN THE ID OF OUR SEEKBAR AND VOLUME FROM OUR XML TO OUR GLOBAL VARIABLE
         volumeSeekBar = findViewById(R.id.seekbar_fm);
+        text_volumen_fm = findViewById(R.id.text_volumen_fm);
+
+        // WE ESTABLISH THAT THE SEEKBAR INITIALIZES AT ZERO
+        volumeSeekBar.setProgress(0);
+
         //HERE WE HAVE THE SETTINGS TO CONTROL THE VOLUME
         volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                float volume = progress / 100f; // CONVERT PROGRESS INTO A VALUE BETWEEN 0.0 y 1.0
+                float volume = (progress / 100f) * 4f; // CONVERT PROGRESS INTO A VALUE BETWEEN 0.0 y 1.0 AND WE INCREASE THE VOLUME
                 mediaPlayer.setVolume(volume, volume);
+
+                //SHOWS WHAT VOLUME THE AUDIO IS AT
+                text_volumen_fm.setVisibility(View.VISIBLE);
+                text_volumen_fm.setText(progress+"/100");
+
             }
 
             @Override
@@ -96,6 +103,8 @@ public class fm extends AppCompatActivity {
             }
         });
 
+        // WE SET THAT THE AUDIO VOLUME WILL INITIALIZE AT ZERO.
+        mediaPlayer.setVolume(0, 0);
         //--------------------------------------------------------------------------------------------------------------
         //---------------------------------END OF THIS SECTION----------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------
@@ -104,14 +113,14 @@ public class fm extends AppCompatActivity {
         //-----------------------------CODE FOR THE VIDEO AT THE TOP TO PLAY AUTOMATICALLY------------------------------
         //--------------------------------------------------------------------------------------------------------------
 
-        //In this part we have what is a code where we play a video which requires us to put an image
-        //in the xml and with only the measurements and the id and here we only send it to call.
+        //IN THIS PART WE HAVE WHAT IS A CODE WHERE WE PLAY A VIDEO WHICH REQUIRES US TO PUT AN IMAGE
+        //IN THE XML AND WITH ONLY THE MEASUREMENTS AND THE ID AND HERE WE ONLY SEND IT TO CALL.
         VideoView videoView = findViewById(R.id.onda_fm);
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.onda;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
-        videoView.setOnPreparedListener(MediaPlayer::start); // Start playback automatically
-        videoView.setOnCompletionListener(MediaPlayer::start); // Play the video again when it ends
+        videoView.setOnPreparedListener(MediaPlayer::start); // START PLAYBACK AUTOMATICALLY
+        videoView.setOnCompletionListener(MediaPlayer::start); // PLAY THE VIDEO AGAIN WHEN IT ENDS
 
         //-------------------------------------------------------------------------------------------------------------------
         //-------------------------------------END OF THIS SECTION-----------------------------------------------------------
@@ -121,12 +130,12 @@ public class fm extends AppCompatActivity {
         //-----------------------------IN THIS SECTION IS THE BUTTON NAVIGATION-----------------------------------------
         //--------------------------------------------------------------------------------------------------------------
 
-        //Here is the code of how to navigate with buttons for the Main Activity button
+        //HERE IS THE CODE OF HOW TO NAVIGATE WITH BUTTONS FOR THE MAIN ACTIVITY BUTTON
         ImageView button_fm = findViewById(R.id.btn_go_back_fm);
         button_fm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an Intent to start Activity, here we send the activity from where we are to where it will take us
+                // CREATE AN INTENT TO START ACTIVITY, HERE WE SEND THE ACTIVITY FROM WHERE WE ARE TO WHERE IT WILL TAKE US
                 Intent intent = new Intent(fm.this, MainActivity.class);
                 startActivity(intent);
                 mediaPlayer.pause();
@@ -172,7 +181,7 @@ public class fm extends AppCompatActivity {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Here the current activity is restarted
+                // HERE THE CURRENT ACTIVITY IS RESTARTED
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);

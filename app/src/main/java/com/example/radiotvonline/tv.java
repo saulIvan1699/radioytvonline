@@ -9,11 +9,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 
 
 public class tv extends AppCompatActivity {
+
+    TextView text_volumen_tv;
 
     /*Televisión
     https://s5.mexside.net:1936/enlinea/enlinea/playlist.m3u8*/
@@ -51,8 +55,20 @@ public class tv extends AppCompatActivity {
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
 
+        // ERROR HANDLER.
+        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                // WE SHOW AN ERROR MESSAGE.
+                Toast.makeText(tv.this, "Error al reproducir el video", Toast.LENGTH_SHORT).show();
+                return true; //WE INDICATE THAT WE HAVE SHOWN THE ERROR.
+            }
+        });
+
         //WE START PLAYING THE LIVE VIDEO
         videoView.start();
+
+
 
         //--------------------------------------------------------------------------------------------------------------
         //--------------------------------------END OF THIS SECTION-----------------------------------------------------
@@ -62,8 +78,9 @@ public class tv extends AppCompatActivity {
         //-----------------------------HERE WE HAVE THE CODE TO CONTROL THE VOLUME---------------------------------
         //--------------------------------------------------------------------------------------------------------------
 
-        // WE ASSIGN THE ID OF OUR SEEKBAR FROM OUR XML TO OUR GLOBAL VARIABLE
+        // WE ASSIGN THE ID OF OUR SEEKBAR AND VOLUME FROM OUR XML TO OUR GLOBAL VARIABLE
         volumeSeekBar = findViewById(R.id.seekbar_tv);
+        text_volumen_tv = findViewById(R.id.text_volumen_tv);
         //HERE WE HAVE THE CODE WHERE WE PREPARE THE SEEKBAR READY TO USE
         volumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -72,6 +89,10 @@ public class tv extends AppCompatActivity {
                     float volume = (float) (1 - (Math.log(100 - progress) / Math.log(100)));
                     mediaPlayer.setVolume(volume, volume);
                 }
+
+                //SHOWS WHAT VOLUME THE AUDIO IS AT
+                text_volumen_tv.setVisibility(View.VISIBLE);
+                text_volumen_tv.setText(progress+"/100");
             }
 
             @Override
@@ -103,12 +124,12 @@ public class tv extends AppCompatActivity {
         //-----------------------------IN THIS SECTION IS THE BUTTON NAVIGATION-----------------------------------------
         //--------------------------------------------------------------------------------------------------------------
 
-        //Here is the code of how to navigate with buttons for the Main Activity button
+        //HERE IS THE CODE OF HOW TO NAVIGATE WITH BUTTONS FOR THE MAIN ACTIVITY BUTTON
         ImageView button_tv = findViewById(R.id.btn_go_back_tv);
         button_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create an Intent to start Activity, here we send the activity from where we are to where it will take us
+                // CREATE AN INTENT TO START ACTIVITY, HERE WE SEND THE ACTIVITY FROM WHERE WE ARE TO WHERE IT WILL TAKE US
                 Intent intent = new Intent(tv.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -126,7 +147,7 @@ public class tv extends AppCompatActivity {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Here the current activity is restarted
+                // HERE THE CURRENT ACTIVITY IS RESTARTED
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
@@ -138,4 +159,21 @@ public class tv extends AppCompatActivity {
         //--------------------------------------------------------------------------------------------------------------
 
     }
+    //--------------------------------------------------------------------------------------------------------------
+    //-----------------------------THIS COGO IS PART OF THE LIVE PLAYBACK OF THE TV---------------------------------
+    //--------------------------------------------------------------------------------------------------------------
+
+    //HERE WE ARE SAYING TO DESTROY THE SCREEN IN CASE IT DOESN'T HAVE A SIGNAL
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------------------
+    //--------------------------------------END OF THIS SECTION-----------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------
 }
