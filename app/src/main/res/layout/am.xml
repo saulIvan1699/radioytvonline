@@ -33,10 +33,11 @@
 
                 <ImageView
                     android:id="@+id/img_title_am"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:layout_marginStart="-5dp"
-                    android:background="@drawable/smrtvsinfondo" />
+                    android:layout_height="100dp"
+                    android:layout_marginStart="-30dp"
+                    android:background="@drawable/smrtvsinfondonew" />
 
             </LinearLayout>
 
@@ -147,7 +148,7 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="120dp"
+                android:layout_height="130dp"
                 android:orientation="horizontal"
                 android:background="@drawable/edge_fm_am"
                 android:layout_margin="10dp"
@@ -157,24 +158,24 @@
                     android:id="@+id/img_play_am"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/playsi"
-                    android:layout_marginTop="0dp"
+                    android:background="@drawable/efecto_btn_play"
+                    android:layout_gravity="center"
                     android:layout_margin="10dp"/>
 
                 <ImageView
                     android:id="@+id/img_refresh_am"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/actualizar"
-                    android:layout_marginTop="0dp"
+                    android:background="@drawable/efecto_btn_refresh"
+                    android:layout_gravity="center"
                     android:layout_margin="10dp"/>
 
                 <ImageView
                     android:id="@+id/img_pause_am"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/pausesi"
-                    android:layout_marginTop="0dp"
+                    android:background="@drawable/efecto_btn_pause"
+                    android:layout_gravity="center"
                     android:layout_margin="10dp"/>
 
             </LinearLayout>

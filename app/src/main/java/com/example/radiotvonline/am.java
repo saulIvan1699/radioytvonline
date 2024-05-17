@@ -33,6 +33,26 @@ public class am extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.am);
 
+
+
+        //--------------------------------------------------------------------------------------------------------------
+        //-----------------------------CODE FOR THE VIDEO AT THE TOP TO PLAY AUTOMATICALLY------------------------------
+        //--------------------------------------------------------------------------------------------------------------
+
+        //IN THIS PART WE HAVE WHAT IS A CODE WHERE WE PLAY A VIDEO WHICH REQUIRES US TO PUT AN IMAGE
+        //IN THE XML AND WITH ONLY THE MEASUREMENTS AND THE ID AND HERE WE ONLY SEND IT TO CALL.
+
+        VideoView videoView = findViewById(R.id.onda_am);
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.onda;
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
+        videoView.setOnPreparedListener(MediaPlayer::start); // START PLAYBACK AUTOMATICALLY.
+        videoView.setOnCompletionListener(MediaPlayer::start); // PLAY THE VIDEO AGAIN WHEN IT ENDS.
+
+        //-------------------------------------------------------------------------------------------------------------------
+        //-------------------------------------END OF THIS SECTION-----------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------------------
+
         // WE INITIALIZE MEDIA PLAYER
         mediaPlayer = new MediaPlayer();
 
@@ -59,7 +79,8 @@ public class am extends AppCompatActivity {
             mediaPlayer.start();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error al reproducir audio"+ e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error al reproducir audio", Toast.LENGTH_SHORT).show();
+
         }
         //--------------------------------------------------------------------------------------------------------------
         //------------------------------------END OF THIS SECTION-------------------------------------------------------
@@ -104,22 +125,7 @@ public class am extends AppCompatActivity {
         //------------------------------------END OF THIS SECTION-------------------------------------------------------
         //--------------------------------------------------------------------------------------------------------------
 
-        //--------------------------------------------------------------------------------------------------------------
-        //-----------------------------CODE FOR THE VIDEO AT THE TOP TO PLAY AUTOMATICALLY------------------------------
-        //--------------------------------------------------------------------------------------------------------------
 
-        //IN THIS PART WE HAVE WHAT IS A CODE WHERE WE PLAY A VIDEO WHICH REQUIRES US TO PUT AN IMAGE
-        //IN THE XML AND WITH ONLY THE MEASUREMENTS AND THE ID AND HERE WE ONLY SEND IT TO CALL.
-        VideoView videoView = findViewById(R.id.onda_am);
-        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.onda;
-        Uri uri = Uri.parse(videoPath);
-        videoView.setVideoURI(uri);
-        videoView.setOnPreparedListener(MediaPlayer::start); // START PLAYBACK AUTOMATICALLY.
-        videoView.setOnCompletionListener(MediaPlayer::start); // PLAY THE VIDEO AGAIN WHEN IT ENDS.
-
-        //-------------------------------------------------------------------------------------------------------------------
-        //-------------------------------------END OF THIS SECTION-----------------------------------------------------------
-        //-------------------------------------------------------------------------------------------------------------------
 
         //--------------------------------------------------------------------------------------------------------------
         //-----------------------------IN THIS SECTION IS THE BUTTON NAVIGATION-----------------------------------------
@@ -152,6 +158,7 @@ public class am extends AppCompatActivity {
             public void onClick(View view) {
                 //START CODE
                 mediaPlayer.start();
+                videoView.start();
             }
         });
         //------------------------------------------------------------------------------------------------------
@@ -162,6 +169,7 @@ public class am extends AppCompatActivity {
             public void onClick(View view) {
                 //PAUSE CODE
                 mediaPlayer.pause();
+                videoView.pause();
             }
         });
 

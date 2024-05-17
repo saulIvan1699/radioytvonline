@@ -33,9 +33,11 @@
 
                 <ImageView
                     android:id="@+id/imgtitulo_fm"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:background="@drawable/smrtvsinfondo" />
+                    android:layout_height="100dp"
+                    android:layout_marginStart="-30dp"
+                    android:background="@drawable/smrtvsinfondonew" />
 
             </LinearLayout>
 
@@ -159,7 +161,7 @@
                     android:id="@+id/img_play_fm"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/playsi"
+                    android:background="@drawable/efecto_btn_play"
                     android:layout_marginTop="0dp"
                     android:layout_margin="10dp"/>
 
@@ -167,7 +169,7 @@
                     android:id="@+id/img_refresh_fm"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/actualizar"
+                    android:background="@drawable/efecto_btn_refresh"
                     android:layout_marginTop="0dp"
                     android:layout_margin="10dp"/>
 
@@ -175,7 +177,7 @@
                     android:id="@+id/img_pause_fm"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/pausesi"
+                    android:background="@drawable/efecto_btn_pause"
                     android:layout_marginTop="0dp"
                     android:layout_margin="10dp"/>
 

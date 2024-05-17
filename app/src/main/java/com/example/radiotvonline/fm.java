@@ -63,7 +63,7 @@ public class fm extends AppCompatActivity {
             mediaPlayer.start();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error al reproducir audio"+ e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Error al reproducir audio", Toast.LENGTH_SHORT).show();
         }
         //--------------------------------------------------------------------------------------------------------------
         //-----------------------------------------END OF THIS SECTION--------------------------------------------------
@@ -155,6 +155,8 @@ public class fm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mediaPlayer.start();
+                videoView.start();
+
             }
         });
 
@@ -166,6 +168,7 @@ public class fm extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mediaPlayer.pause();
+                videoView.pause();
             }
         });
 

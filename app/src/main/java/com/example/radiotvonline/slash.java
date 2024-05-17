@@ -17,7 +17,7 @@ public class slash extends AppCompatActivity {
         setContentView(R.layout.slash);
 
         final ImageView imageView = findViewById(R.id.slash); //WE ASSIGN OUR ID FROM OUR SLASH
-        imageView.setImageResource(R.drawable.butonsmrtvodos); // WE ESTABLISH OUR IMAGE THAT APPEARS IN OUR SLASH
+        imageView.setImageResource(R.drawable.butonsmrtvdosnew); // WE ESTABLISH OUR IMAGE THAT APPEARS IN OUR SLASH
 
         //TELL THE APP WHAT YOU WILL DO AFTER IT FINISHES SHOWING OUR SLASH
         new Handler().postDelayed(new Runnable() {

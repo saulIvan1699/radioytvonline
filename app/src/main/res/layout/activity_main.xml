@@ -25,8 +25,6 @@
                     android:id="@+id/vv_test"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-
-
             </LinearLayout>
 
 
@@ -41,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.332"
-            app:srcCompat="@drawable/newbtnam" />
+            app:srcCompat="@drawable/efecto_btn_am" />
 
         <ImageView
             android:id="@+id/btn_tv"
@@ -49,23 +47,23 @@
             android:layout_height="311dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.91"
+            app:layout_constraintHorizontal_bias="0.865"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.697"
-            app:srcCompat="@drawable/newbtntv" />
+            app:layout_constraintVertical_bias="0.661"
+            app:srcCompat="@drawable/efecto_btn_tv" />
 
         <ImageView
-                android:id="@+id/btn_fm"
-                android:layout_width="190dp"
-                android:layout_height="228dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.434"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/newbtnfm" />
+            android:id="@+id/btn_fm"
+            android:layout_width="190dp"
+            android:layout_height="228dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.442"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.943"
+            app:srcCompat="@drawable/efecto_btn_fm" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
